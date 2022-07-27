@@ -8,8 +8,12 @@ import { AuthService } from "./auth.service";
   templateUrl: './auth.component.html'
 })
 export class AuthComponent implements OnInit {
-  public isLoginMode = true
   public authForm: FormGroup;
+
+  public isLoginMode = true
+  public isLoading = false;
+
+  public error: string = null;
 
   constructor(private authService: AuthService) {
   }
@@ -38,13 +42,23 @@ export class AuthComponent implements OnInit {
 
     const {email, password} = this.authForm.value;
 
+    this.isLoading = true;
+
     if (this.isLoginMode) {
       // ...
     } else {
       this.authService.signup(email, password)
         .subscribe(
-          responseData => console.log(responseData),
-          error => console.log(error)
+          responseData => {
+            console.log(responseData);
+
+            this.isLoading = false;
+          },
+          error => {
+            this.error = 'An error occurred!'
+
+            this.isLoading = false;
+          }
         );
     }
 
