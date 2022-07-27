@@ -48,7 +48,6 @@ export class AuthComponent implements OnInit {
       : this.authService.signup(email, password);
 
     this.isLoading = true;
-
     authObs.subscribe(
       responseData => {
         console.log(responseData);
