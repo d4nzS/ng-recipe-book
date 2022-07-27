@@ -4,6 +4,7 @@ import { catchError, Observable, Subject, tap, throwError } from "rxjs";
 
 import { User } from "./user.model";
 
+
 export interface AuthResponseData {
   idToken: string;
   email: string;
@@ -30,12 +31,15 @@ export class AuthService {
         password,
         returnSecureToken: true
       }
-    ).pipe(catchError(this.handleError), tap(resData => this.handleAuthentication(
-      resData.email,
-      resData.localId,
-      resData.idToken,
-      +resData.expiresIn
-    )));
+    ).pipe(
+      catchError(this.handleError),
+      tap(resData => this.handleAuthentication(
+        resData.email,
+        resData.localId,
+        resData.idToken,
+        +resData.expiresIn
+      ))
+    );
   }
 
   public login(email: string, password: string): Observable<AuthResponseData> {
@@ -46,12 +50,15 @@ export class AuthService {
         password,
         returnSecureToken: true
       }
-    ).pipe(catchError(this.handleError), tap(resData => this.handleAuthentication(
-      resData.email,
-      resData.localId,
-      resData.idToken,
-      +resData.expiresIn
-    )));
+    ).pipe(
+      catchError(this.handleError),
+      tap(resData => this.handleAuthentication(
+        resData.email,
+        resData.localId,
+        resData.idToken,
+        +resData.expiresIn
+      ))
+    );
   }
 
   private handleAuthentication(email: string,

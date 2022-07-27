@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 
 import { AuthResponseData, AuthService } from "./auth.service";
@@ -16,7 +17,8 @@ export class AuthComponent implements OnInit {
 
   public error: string = null;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -53,6 +55,8 @@ export class AuthComponent implements OnInit {
         console.log(responseData);
 
         this.isLoading = false;
+
+        this.router.navigate(['/']);
       },
       errorMessage => {
         console.log(errorMessage);
