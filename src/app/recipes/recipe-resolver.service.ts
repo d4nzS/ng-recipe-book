@@ -11,7 +11,7 @@ import { RecipeService } from "./recipe.service";
   providedIn: 'root'
 })
 export class RecipeResolverService implements Resolve<Recipe[]> {
-  constructor(private  dataStorageService: DataStorageService,
+  constructor(private dataStorageService: DataStorageService,
               private recipeService: RecipeService) {
   }
 
