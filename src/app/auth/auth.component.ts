@@ -36,7 +36,7 @@ export class AuthComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    if (this.authForm.invalid ) {
+    if (this.authForm.invalid) {
       return;
     }
 
@@ -47,19 +47,19 @@ export class AuthComponent implements OnInit {
     if (this.isLoginMode) {
       // ...
     } else {
-      this.authService.signup(email, password)
-        .subscribe(
-          responseData => {
-            console.log(responseData);
+      this.authService.signup(email, password).subscribe(
+        responseData => {
+          console.log(responseData);
 
-            this.isLoading = false;
-          },
-          error => {
-            this.error = 'An error occurred!'
+          this.isLoading = false;
+        },
+        errorMessage => {
+          console.log(errorMessage);
+          this.error = errorMessage;
 
-            this.isLoading = false;
-          }
-        );
+          this.isLoading = false;
+        }
+      );
     }
 
     this.authForm.reset();
